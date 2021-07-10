@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet"/>
+        <!-- <script src="puzzle.js"></script> -->
+        <title>
+            Puzzle Game
+        </title>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Puzzle Game</h2>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+    
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+    
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+    
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+    
+            <div class="card unlinked"></div>
+            <div class="card unlinked"></div>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                var app = {
+                    cards:[0,1,2,3,4,5,6,7,8,0,1,2,3,4,5,6,7,8],
+                    init:function(){
+                    app.Jumble();
+                    },
+    
+                    Jumble:function(){
+                        var randomVal = 0;
+                        var temp = 0;
+                        var i = 0
+                        while (i<app.length) {
+                            randomVal = Math.round(Math.random()*i);
+                            temp=app.cards[i];
+                            app.cards[i]=app.cards[randomVal];
+                            app.cards[randomVal]=temp;
+                            i=i+1;
+                        }
+                        app.assignCards();
+                        //console.log(app.cards)
+                    },
+    
+                    assignCards:function(){
+                        $('.card').each(function(index){
+                            $(this).attr('data-card-value',app.cards[index]);
+                        });
+                        app.clickHandlers();
+                    },
+    
+                    clickHandlers: function(){
+                        $('.card').on('click', function(){
+                            $(this).html('<p>'+$(this).data('cardValue')+'</p>').addClass('selected');
+                            app.checkMatch();
+                        });
+                    },
+    
+                    checkMatch: function(){
+                        var count = 0
+    
+                        if($('.selected').length==2){
+                            if($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')){
+                                $('.selected').each(function(){
+                                    $(this).animate({
+                                        opacity:0
+                                    }).removeClass('unlinked');
+                                });
+                                $('.selected').each(function(){
+                                    $(this).removeClass('selected');
+                                });
+                                count++;
+                            }
+                            else{
+                                setTimeout(function(){
+                                    $('.selected').each(function(){
+                                        $(this).html('').removeClass('selected');
+                                    })
+                                },250);
+                            }
+                            rating(count);
+                            $count.html(count);
+                        }
+                    },
+                };
+            app.init();
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,37 @@
+.container{
+    width: 1000px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    justify-content: center;
+    text-align: center;
+}
+
+.card{
+    float: left;
+    margin: 5px;
+    height: 150px;
+    width: 150px;
+    background-color: green;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px #ccc;
+}
+
+.card p{
+    font-size: 30px;
+    color: white;
+    justify-content: center;
+    text-align: center;
+}
+
+.card:hover{
+    cursor: pointer;
+    border: 3px solid green;
+}
+
+*{
+    box-sizing: border-box;
+}

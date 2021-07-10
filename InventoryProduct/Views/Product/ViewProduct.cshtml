@@ -1,0 +1,54 @@
+﻿@model IEnumerable<InventoryProduct.Models.Product>
+@{
+    ViewBag.Title = "ViewProduct";
+}
+
+<h2>ViewProduct</h2>
+
+<p class="btn btn-success" style="margin-bottom:10px">
+    @Html.ActionLink("ADD","AddAProduct","Product")
+</p>
+
+@using (Html.BeginForm("ViewProduct", "Product", FormMethod.Get))
+{
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(Model => Model.DiscountRange)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(ModelItem => item.DiscountRange)
+                </td>
+                <td>
+                    <i class="fa fa-pencile"></i>
+                    @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductId }) |
+                    <i class="fa fa-info"></i>
+                    @Html.ActionLink("Details", "DetailsProduct", new { id = item.ProductId }) |
+                    <i class="fa fa-trash"></i>
+                    @Html.ActionLink("Remove", "DeleteProduct", new { id = item.ProductId }) |
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

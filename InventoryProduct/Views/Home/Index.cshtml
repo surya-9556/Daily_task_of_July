@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .card{
+        float:left;
+        position:relative;
+        margin:5px;
+        padding:10px;
+        border:solid;
+    }
+
+    .card-img-top{
+        height:100px;
+        width:100px;
+    }
+</style>
+
+<div class="card-deck">
+    <div class="card">
+        <img class="card-img-top" src="~/Images/OIP.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><b>Products</b></h5>
+            <p class="card-text">A wide varity of product's can ve <br /> viewed over here.</p>
+        </div>
+        <div class="card-footer">
+            <p class="btn btn-block btn-default">
+                @Html.ActionLink("Product","ViewProduct", "Product")
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="~/Images/customer-service_customer-experience_happy_rating_strategy_tablet_reviews_by-ipopba-getty-100806901-large.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><b>Customers</b></h5>
+            <p class="card-text">You can view the list of customers using <br />this application.</p>
+        </div>
+        <div class="card-footer">
+            <p class="btn btn-block btn-default">
+                @Html.ActionLink("Customer","ViewCustomer", "Customers")
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="~/Images/OIP (1).jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><b>Purchase Order</b></h5>
+            <p class="card-text">You can view the list Purchases made by the <br /> customer and amount he spent.</p>
+        </div>
+        <div class="card-footer">
+            <p class="btn btn-block btn-default">
+                @Html.ActionLink("Customer Purchase","Index", "PurchaseOrders")
+            </p>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="~/Images/OIP (1).jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><b>Purchase Order Details </b></h5>
+            <p class="card-text">You can view the list Purchases he made with<br /> the product name and the qty he orderd.</p>
+        </div>
+        <div class="card-footer">
+            <p class="btn btn-block btn-default">
+                @Html.ActionLink("Poduct Purchase","ViewPurchaseDetails", "PurchaseDetails")
+            </p>
+        </div>
+    </div>
+</div>

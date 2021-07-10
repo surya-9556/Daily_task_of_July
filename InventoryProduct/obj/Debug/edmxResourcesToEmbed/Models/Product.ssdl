@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DiscountRange" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PurchaseOrder">
+    <Key>
+      <PropertyRef Name="POID" />
+    </Key>
+    <Property Name="POID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PurchaseOrderDetails">
+    <Key>
+      <PropertyRef Name="PODID" />
+    </Key>
+    <Property Name="PODID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OID" Type="int" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="qty" Type="int" />
+  </EntityType>
+  <Association Name="FK_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="PurchaseOrder">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="PurchaseOrderDetails" Type="Self.PurchaseOrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDetails">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchase">
+    <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="0..1" />
+    <End Role="PurchaseOrderDetails" Type="Self.PurchaseOrderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrder">
+        <PropertyRef Name="POID" />
+      </Principal>
+      <Dependent Role="PurchaseOrderDetails">
+        <PropertyRef Name="OID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InventoryModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="Customer" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="Product" store:Type="Tables" />
+    <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="Purchase" store:Type="Tables" />
+    <EntitySet Name="PurchaseOrderDetails" EntityType="Self.PurchaseOrderDetails" Schema="Purchase" store:Type="Tables" />
+    <AssociationSet Name="FK_Customer" Association="Self.FK_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product" Association="Self.FK_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchase" Association="Self.FK_Purchase">
+      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+      <End Role="PurchaseOrderDetails" EntitySet="PurchaseOrderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

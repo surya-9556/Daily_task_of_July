@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-bordered table-striped" id="Filter1TBL" style="width:100%">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>POID</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+</table>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Filter1TBL").DataTable({
+                "ajax": {
+                    "type": "GET",
+                    "url": "/Filtering/GetPro",
+                    "datatype": "json"
+                },
+                "columns": [
+                    {
+                        "data": "Date", 'render': function (jsonDate) {
+                            var date = new Date(parseInt(jsonDate.substr(6)));
+                            var month = ("0" + (date.getMonth() + 1)).slice(-2);
+                            return ("0" + date.getDate()).slice(-2) + '-' + month + '-' + date.getFullYear();
+                        },
+                        "name": "date"
+                    },
+                    { "data": "POID", "name": "POID" },
+                    { "data": "Price", "name": "Price" },
+                ],
+            })
+        })
+    </script>
+}
