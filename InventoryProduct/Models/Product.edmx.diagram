@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4dbcac27288b4bef9b347e8ddf754ae7" Name="Diagram1">
         <EntityTypeShape EntityType="InventoryModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="InventoryModel.Product" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Product" Width="1.5" PointX="8.625" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.PurchaseOrder" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="InventoryModel.PurchaseOrderDetail" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="InventoryModel.FK_Customer" ManuallyRouted="false" />

@@ -11,8 +11,7 @@ namespace InventoryProduct.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PurchaseOrder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,7 +22,6 @@ namespace InventoryProduct.Models
     
         public int POID { get; set; }
         public Nullable<int> CustomerId { get; set; }
-        [DataType(DataType.Date)]
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<decimal> Amount { get; set; }
     

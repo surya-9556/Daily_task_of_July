@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Drop Down List</h2>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<select id="CountryList">
+    <option value="Select">
+        --Select--
+    </option>
+</select>
+<br />
+<select id="StateList">
+    <option value="Select">
+        --Select--
+    </option>
+</select>
+<br />
+<select id="CityList">
+    <option value="Select">
+        --Select--
+    </option>
+</select>
+
+<script>
+    function dropdown(url, data, type) {
+        return $.ajax({
+            url: url,
+            type: type ? type : 'GET',
+            data: data,
+            contentType: 'application/json'
+        });
+    }
+
+    $(function () {
+
+        dropdown('/Casc/GetCountry', null).done(function (response) {
+            if (response.length > 0) {
+                $('#CountryList').html('');
+                var options = '';
+                options += '<option value="Select">--Select--</option>';
+                for (var i = 0; i < response.length; i++) {
+                    options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+                }
+                $('#CountryList').append(options);
+
+            }
+        });
+
+        $('#CountryList').on("change", function () {
+            var country = $('#CountryList').val();
+            var obj = { country: country };
+            dropdown('/Casc/GetStates', JSON.stringify(obj), 'POST').done(function (response) {
+                if (response.length > 0) {
+                    $('#StateList').html('');
+                    var options = '';
+                    options += '<option value="Select">--Select--</option>';
+                    for (var i = 0; i < response.length; i++) {
+                        options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+                    }
+                    $('#StateList').append(options);
+
+                }
+            });
+        });
+
+        $('#StateList').on("change", function () {
+            var country = $('#StateList').val();
+            var obj = { state: country };
+            dropdown('/Casc/GetCity', JSON.stringify(obj), 'POST').done(function (response) {
+                if (response.length > 0) {
+                    $('#CityList').html('');
+                    var options = '';
+                    options += '<option value="Select">--Select--</option>';
+                    for (var i = 0; i < response.length; i++) {
+                        options += '<option value="' + response[i] + '">' + response[i] + '</option>';
+                    }
+                    $('#CityList').append(options);
+
+                }
+            });
+        });
+
+    });
+</script>
