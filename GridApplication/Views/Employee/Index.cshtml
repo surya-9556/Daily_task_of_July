@@ -1,0 +1,39 @@
+﻿@using Kendo.Mvc.UI
+@model GridApplication.Models.SoftWareEmployee
+@{
+    Layout = null;
+}
+
+<h2>Index</h2>
+
+<script src="~/Scripts/kendo/2021.2.616/jquery.min.js"></script>
+<script src="~/Scripts/kendo/2021.2.616/kendo.all.min.js"></script>
+<link href="~/Content/kendo/2021.2.616/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2021.2.616/kendo.default.min.css" rel="stylesheet" />
+
+<div style="width:60%;height:100%">
+    @(Html.Kendo().Grid<GridApplication.Models.SoftWareEmployee>()
+        .Name("BindGridUsingRead")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.EmpId).Width(15).Title("Sr. No.").Filterable(false);
+            columns.Bound(p => p.EmpName).Title("Name").Width(30).Filterable(false);
+            columns.Bound(p => p.EmpSalary).Title("Salary").Width(15).Filterable(false);
+            columns.Bound(p => p.EmpDOB).Title("DOB").Width(15).Filterable(false);
+            columns.Bound(p => p.EmpAddress).Title("Address").Width(15).Filterable(false);
+            columns.Bound(p => p.EmpStatus).Title("Status").Width(15).Filterable(false);
+        })
+           .Scrollable()
+           .Pageable(x => x.PageSizes(new List<object> { 10, 20, 30, 40, 50, "all" }).Refresh(true))
+            .Filterable(ftp => ftp.Mode(GridFilterMode.Row))
+            .Resizable(resize => resize.Columns(true))
+            .HtmlAttributes(new { style = "height: 100%" })
+            .Selectable()
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model => model.Id(p => p.EmpId))
+            .ServerOperation(false)
+            .Read(read => read.Action("BindData", "Employee"))
+     )
+    )
+</div> 

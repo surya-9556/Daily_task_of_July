@@ -40,11 +40,8 @@
                     @Html.DisplayFor(ModelItem => item.DiscountRange)
                 </td>
                 <td>
-                    <i class="fa fa-pencile"></i>
                     @Html.ActionLink("Edit", "EditProduct", new { id = item.ProductId }) |
-                    <i class="fa fa-info"></i>
                     @Html.ActionLink("Details", "DetailsProduct", new { id = item.ProductId }) |
-                    <i class="fa fa-trash"></i>
                     @Html.ActionLink("Remove", "DeleteProduct", new { id = item.ProductId }) |
                 </td>
             </tr>

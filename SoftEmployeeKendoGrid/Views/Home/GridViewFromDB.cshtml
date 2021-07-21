@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "GridViewFromDB";
+}
+
+<h1>Grid View From DB</h1>
+
+<div id="example">
+    <div id="gridDB"></div>
+</div>
+
+@section Scripts{ 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#gridDB").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: '/Home/GetEmployeeData',
+                            type: "get",
+                            dataType: "json",
+                            contentType: 'application/json; charset=utf-8',
+                        }
+                    },
+                    schema: {
+                        data: function (result) {
+                            return result;
+                        },
+                        model: {
+                            fields: {
+                                empName: { type: "string" },
+                                empSalary: { type: "decimal" },
+                                empDOB: { type: "date" },
+                                empAddress: { type: "string" },
+                                empStatus: { type: "string" }
+                            }
+                        }
+                    },
+                    pageSize: 15
+                },
+                height: 550,
+                scrollable: true,
+                sortable: true,
+                filterable: true,
+                pageable: {
+                    input: true,
+                    numeric: false
+                },
+                columns: [
+                    { field: "empName", title: "Salary" },
+                    { field: "empSalary", title: "Salary" },
+                    { field: "empDOB", title: "Date", width: "130px" },
+                    { field: "empAddress", title: "Salary" },
+                    { field: "empStatus", title: "Salary" }
+                ]
+            });
+        });
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="SoftWareEmployee">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EmpSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="EmpDOB" Type="DateTime" Precision="0" />
+    <Property Name="EmpAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="EmpStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SoftWareEmployees" EntityType="Self.SoftWareEmployee" />
+  </EntityContainer>
+</Schema>

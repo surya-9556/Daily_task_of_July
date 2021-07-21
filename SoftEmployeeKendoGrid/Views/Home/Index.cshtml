@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <label>Choose Date</label>
+    <input type="text" id="grid" />
+</div>
+<div>
+    <label>Choose Date</label>
+    <input type="text" id="grid1" />
+</div>
+
+@section scripts{
+
+<script type="text/javascript">
+    var date = new Date();
+    date.setDate(date.getDate());
+    $(document).ready(function () {
+        $("#grid").kendoDatePicker();
+    })
+    $(document).ready(function () {
+        $("#grid1").kendoDatePicker({ value: date });
+    })
+</script>
+
+}
